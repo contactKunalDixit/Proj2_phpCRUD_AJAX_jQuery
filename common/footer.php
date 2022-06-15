@@ -7,6 +7,11 @@
 <!-- <script src="js/script.js"></script> -->
 <!-- CSS only -->
 
+</body>
+
+</html>
+
+
 
 </script>
 </body>

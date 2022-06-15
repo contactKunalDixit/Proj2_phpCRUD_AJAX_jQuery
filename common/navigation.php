@@ -33,22 +33,22 @@ $user = !empty($_SESSION["user"]) ? $_SESSION["user"] : [];
                 <?php
                 } else { ?>
                 <li class="nav-item  active">
-                    <a href="#" class="nav-link" href="<?php echo SITE_URL . "index.php" ?>">Home <span
-                            class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<?php echo SITE_URL . "index.php" ?>">Home
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" role="button" data-toggle="modal" data-target="#userModal">Add
-                        Employee</a>
+                    <a class="nav-link" href="<?php echo SITE_URL . "addNewEmployee.php" ?>">Add Employee
+                    </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="#" role="button" data-toggle="modal"
                         data-target="#userViewModal">Profile</a>
                 </li>
 
-
-
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo SITE_URL . "logout.php" ?>">Log Out</a>
+                    <a class="nav-link" href="<?php echo SITE_URL . "logout.php" ?>">Log Out
+                    </a>
 
                 </li>
 

@@ -2,7 +2,7 @@
 include_once "includes/config.php";
 include_once "includes/database.php";
 include_once "common/header.php";
-include_once "addNewEmployee_MODAL.php";
+
 include_once "userSelfProfile_MODAL.php";
 
 
