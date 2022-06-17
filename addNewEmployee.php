@@ -21,21 +21,29 @@ if (empty($_SESSION["user"])) {
         <div class="col-md-6">
 
 
-            <div class="card">
+            <div class="card mt-5">
                 <header class="card-header">
                     <h4 class="card-title mt-2">Add/Edit Contact</h4>
                 </header>
                 <article class="card-body">
-                    <form method="post" action="<?php echo SITE_URL . 'user_Action_Inputs/add_employee_inputs.php' ?>"
+                    <form method="post"
+                        action="<?php echo SITE_URL . 'user_Action_Inputs/add_newEmployee_inputs.php' ?>"
                         enctype="multipart/form-data">
-                        <div class="form-row">
-                            <div class="col form-group">
-                                <label>Employee Name </label>
-                                <input type="text" name="empName" value="<?php echo $empName ?>" class="form-control"
-                                    placeholder="Employee Name">
-                            </div>
+                        <!-- <div class="form-row"> -->
+                        <div class="form-group">
+                            <label>Employee ID: </label>
+                            <input type="text" name="empID" value="  <?php echo $empID ?>" class="form-control"
+                                placeholder="Employee ID">
 
                         </div>
+                        <div class="form-group">
+                            <label>Employee Name </label>
+                            <input type="text" name="empName" value="<?php echo $empName ?>" class="form-control"
+                                placeholder="Employee Name">
+                        </div>
+
+                        <!-- </div> -->
+
                         <div class="form-group">
                             <label>Email Address:</label>
                             <input type="email" name="email" value="  <?php echo $email ?>" class="form-control"

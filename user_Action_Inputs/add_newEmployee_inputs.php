@@ -16,7 +16,17 @@ if (!empty($_SESSION["user"])) {
 $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    print_arr($_POST);
+
+
+    // Emp ID validation
+    if (empty($_POST["empID"])) {
+        $errors[] = "Employee ID is required";
+    } else {
+        $empID = test_input($_POST["empID"]);
+        if (empty($empID) && !is_numeric($empID)) {
+            $errors[] = "Invalid Emp ID";
+        }
+    }
 
     // Emp Name Validation
     if (empty($_POST["empName"])) {
@@ -25,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $fullName = test_input($_POST["empName"]);
 
         if (!preg_match("/^[a-zA-Z-' ]*$/", $fullName)) {
-            $errors[] = "Only letters and white space allowed";
+            $errors[] = "Only letters and white space allowed in Name";
         }
     }
 
@@ -75,5 +85,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!empty($errors)) {
         $_SESSION["errors"] = $errors;
+        header("location:" . SITE_URL . "addNewEmployee.php");
+        exit();
     };
+
+    // Add a new Record:
+    $sql = "INSERT INTO `employeesTable` (`empID`, `empName`, `email`, `phone`, `address`, `designation`, `salary`) VALUES ('{$empID}', '{$fullName}','{$email}','{$phone}','{$address}','{$designation}','{$salary}') ";
+
+    $message = "New Employee details has been added succussfully";
+
+    $conn = db_connect();
+    if (mysqli_query($conn, $sql)) {
+        db_close($conn);
+        $_SESSION["success"] = $message;
+        header("location:" . SITE_URL);
+        exit();
+    } else {
+        echo "ERROR: " . $sql . mysqli_error($conn);
+    }
 }
