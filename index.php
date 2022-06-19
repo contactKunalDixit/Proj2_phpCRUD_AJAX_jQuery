@@ -1,4 +1,6 @@
 <?php
+ob_start();
+session_start();
 include_once "includes/config.php";
 include_once "includes/database.php";
 include_once "common/header.php";
@@ -34,12 +36,13 @@ if ((!empty($_SESSION["user"]) && !empty($_SESSION["user"]["id"]))) {
 
         </div>
     </div>
+    <!-- Get User's contacts from database: -->
     <?php
     if (!empty($userID)) {
         $conn = db_connect();
-        $empSQL = "SELECT * FROM `employeesTable` WHERE `owner_id` = $userID";
+        $empSQL = "SELECT * FROM `employeesTable` WHERE `owner_id` = $userID ORDER BY id ASC LIMIT 0,10";
         $sqlRes = mysqli_query($conn, $empSQL);
-        $$sqlRows = mysqli_num_rows($sqlRes);
+        $sqlRows = mysqli_num_rows($sqlRes);
         if ($sqlRows > 0) {
     ?>
     <table class="table text-center">
@@ -56,13 +59,18 @@ if ((!empty($_SESSION["user"]) && !empty($_SESSION["user"]["id"]))) {
                     while ($resultArr = mysqli_fetch_assoc($sqlRes)) {
                     ?>
             <tr>
-                <!-- <td class="align-middle"><img src="https://via.placeholder.com/50.png/09f/666"
-                        class="img-thumbnail img-list" /></td> -->
+                <td class="align-middle">
+                <td class="align-middle"><img src="https://via.placeholder.com/50.png/09f/666"
+                        class="img-thumbnail img-list" /></td>
+
+                </td>
                 <td class="align-middle"><?php echo $resultArr["empName"] ?></td>
                 <td class="align-middle">
-                    <a href="/contactbook/view.php?id=9" class="btn btn-success">View</a>
-                    <a href="/contactbook/addcontact.php?id=9" class="btn btn-primary">Edit</a>
-                    <a href="/contactbook/delete.php?id=9" class="btn btn-danger"
+                    <a href="<?php echo SITE_URL . 'view.php?id=' . $resultArr["id"]; ?> "
+                        class="btn btn-success">View</a>
+                    <a href="<?php echo SITE_URL . 'addNewEmployee.php?id=' . $resultArr["id"]; ?> "
+                        class="btn btn-primary">Edit</a>
+                    <a href="<?php echo SITE_URL . 'delete.php?id=' . $resultArr["id"]; ?>" class="btn btn-danger"
                         onclick="return confirm(`Are you sure want to delete this contact?`)">Delete</a>
                 </td>
             </tr>

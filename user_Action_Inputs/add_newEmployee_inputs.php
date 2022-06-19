@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // Add a new Record:
-    $sql = "INSERT INTO `employeesTable` (`empID`, `empName`, `email`, `phone`, `address`, `designation`, `salary`) VALUES ('{$empID}', '{$empName}','{$email}','{$phone}','{$address}','{$designation}','{$salary}') ";
+    $sql = "INSERT INTO `employeesTable` (empID, empName, email, phone, designation, salary) VALUES ('{$empID}', '{$empName}','{$email}','{$phone}','{$designation}','{$salary}') ";
 
     $message = "New Employee details has been added succussfully";
 
@@ -102,6 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("location:" . SITE_URL);
         exit();
     } else {
+        header("location:" . SITE_URL . "login.php");
         echo "ERROR: " . $sql . mysqli_error($conn);
     }
 }
